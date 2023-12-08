@@ -1,0 +1,234 @@
+﻿<Window x:Class="SimpleCircuitDesigner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimpleCircuitDesigner"
+        mc:Ignorable="d"
+        Height="716" 
+        Width="1280"
+        x:Name="CircuitDesignerWindow"
+        Title="Default"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        WindowState="Minimized"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style TargetType="Border"
+                   x:Key="MainWindowBorderStyle">
+            <Setter Property="CornerRadius" Value="25"/>
+            <Setter Property="Background" Value="AntiqueWhite"/>
+        </Style>
+
+        <Style TargetType="Border"
+               x:Key="BorderOfInternalElements">
+            <Setter Property="CornerRadius" Value="25"/>
+            <Setter Property="Background" Value="#5A5A5A"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Black" 
+                                      Direction="240"
+                                      ShadowDepth="5"
+                                      BlurRadius="5"
+                                      Opacity="0.7"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ToggleButton"
+               x:Key="InternalToggleButtonStyle">
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#00c958"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="#00c958"
+                                BorderThickness="3"
+                                CornerRadius="10"
+                                x:Name="BorderOnEnterSimulation">
+
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="Button.MouseLeave">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation To="#00c958"
+                                                            Duration="0:0:0.15"
+                                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="Button.MouseDown">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation To="#005c28" 
+                                                            Duration="0:0:0.15" 
+                                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="Button.MouseUp">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation To="#009441" 
+                                                            Duration="0:0:0.15" 
+                                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="Button.MouseEnter">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation To="#009441" 
+                                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                            Duration="0:0:0.15" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Black" 
+                                      Direction="240"
+                                      ShadowDepth="5"
+                                      BlurRadius="5"
+                                      Opacity="0.2"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Border Style="{StaticResource MainWindowBorderStyle}">
+        <Canvas>
+            <!--
+                На canvas'е будет находиться 
+                интерактивная сетка объектов 
+            -->
+            <Grid Height="716" Width="1280" 
+                  HorizontalAlignment="Center" 
+                  VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="275"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Style="{StaticResource BorderOfInternalElements}"
+                        Margin="15"
+                        x:Name="ItemBorder">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="649*"/>
+                            <RowDefinition Height="67*"/>
+                        </Grid.RowDefinitions>
+
+                        <Border CornerRadius="0,0,25,25"
+                                Grid.Row="1"
+                                Background="Gray">
+                            <!--ТУТ БУДЕТ ПОИСК-->
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <!--
+                            Строка для расположения кнопок 
+                            переключения режимов:
+                            редактирование и симуляция
+                        -->
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="289*"/>
+                        <RowDefinition Height="39*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="2" Margin="-272,15,15,15"
+                          x:Name="BottomGrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0*"/>
+                            <ColumnDefinition Width="83*"/>
+                            <ColumnDefinition Width="176*"/>
+                            <ColumnDefinition Width="83*"/>
+                            <ColumnDefinition Width="484*"/>
+                            <ColumnDefinition Width="451*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <ToggleButton Style="{StaticResource InternalToggleButtonStyle}"
+                                      x:Name="Button_CollapseItemPanel"
+                                      MouseUp="Button_CollapseItemPanel_MouseUp"
+                                      MouseDown="Button_CollapseItemPanel_MouseDown" 
+                                      Grid.Column="3"
+                                      Margin="15,0,0,0">
+                            <ToggleButton.Content>
+                                <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\left-arrow.png"
+                                               Margin="2.5,7.5,7.5,7.5"/>
+                            </ToggleButton.Content>
+                        </ToggleButton>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="291*"/>
+                            <ColumnDefinition Width="146*"/>
+                            <ColumnDefinition Width="484*"/>
+                            <ColumnDefinition Width="84*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Style="{StaticResource BorderOfInternalElements}"
+                                Grid.Column="1"
+                                CornerRadius="0,0,50,50"
+                                Background="Gray">
+                            <WrapPanel HorizontalAlignment="Center"
+                                       VerticalAlignment="Center">
+                                <ToggleButton x:Name="Button_EnterSimulation"
+                                    Style="{StaticResource InternalToggleButtonStyle}"
+                                              Height="50" Width="50"
+                                              MouseDown="Button_EnterSimulation_MouseDown"
+                                              MouseUp="Button_EnterSimulation_MouseUp">
+                                    <ToggleButton.Content>
+                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\PlayButton.png"
+                                               Margin="10"/>
+                                    </ToggleButton.Content>
+                                </ToggleButton>
+                            </WrapPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource BorderOfInternalElements}"
+                                Grid.Column="3"
+                                CornerRadius="0,25,0,50"
+                                Background="Gray">
+                            <ToggleButton Style="{StaticResource InternalToggleButtonStyle}"
+                                          HorizontalAlignment="Right"
+                                          VerticalAlignment="Center"
+                                          Height="40"
+                                          Width="40"
+                                          Margin="0,0,15,0"
+                                          x:Name="Button_CloseApp"
+                                          Click="Button_CloseApp_Click">
+                            </ToggleButton>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Canvas>
+    </Border>
+</Window>
