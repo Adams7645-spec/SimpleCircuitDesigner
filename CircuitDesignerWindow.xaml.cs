@@ -25,11 +25,15 @@ namespace SimpleCircuitDesigner
         private bool IsSimulationEntered = false;
         private bool IsItemPanelCollapsed = false;
         private string BaseImageFolderUri = @"E:\Programm\SimpleCircuitDesigner\ImageSource\";
+        public static Canvas? MainItemCanvas { get; private set; }
         public MainWindow()
         {
             InitializeComponent();
-        }
+            ItemField.Focusable = true;
+            ItemField.Focus();
 
+            MainItemCanvas = ItemField;
+        }
         private void Button_EnterSimulation_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Button_EnterSimulation.Margin = new Thickness(0, 5, 0, 0);
@@ -65,6 +69,15 @@ namespace SimpleCircuitDesigner
                 Button_CollapseItemPanel.SetValue(Grid.ColumnProperty, 3);
                 BottomGrid.Margin = new Thickness(-272, 15, 15, 15);
             }
+        }
+
+        private void EssentialDesignElement_GND_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var item = new EssentialItemGND("E:/Programm/SimpleCircuitDesigner/ImageSource/GND.png",
+                                            "Test",
+                                            new Point(ItemField.ActualHeight / 2, ItemField.ActualWidth / 2),
+                                            AuxiliaryEnums.GNDDisplayType.Signal);
+            item.CreateModel();
         }
 
         private void Button_CloseApp_Click(object sender, RoutedEventArgs e)

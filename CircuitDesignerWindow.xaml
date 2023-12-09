@@ -38,6 +38,24 @@
             </Setter>
         </Style>
 
+        <Style TargetType="Label"
+               x:Key="InternalLabelStyle">
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Black" 
+                                      Direction="240"
+                                      ShadowDepth="5"
+                                      BlurRadius="5"
+                                      Opacity="0.2"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style TargetType="ToggleButton"
                x:Key="InternalToggleButtonStyle">
             <Setter Property="FontFamily" Value="Verdana"/>
@@ -119,14 +137,11 @@
     </Window.Resources>
 
     <Border Style="{StaticResource MainWindowBorderStyle}">
-        <Canvas>
-            <!--
-                На canvas'е будет находиться 
-                интерактивная сетка объектов 
-            -->
+        <Canvas x:Name="ItemField">
             <Grid Height="716" Width="1280" 
                   HorizontalAlignment="Center" 
-                  VerticalAlignment="Top">
+                  VerticalAlignment="Top"
+                  Panel.ZIndex="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="275"/>
                     <ColumnDefinition Width="*"/>
@@ -141,21 +156,195 @@
                             <RowDefinition Height="67*"/>
                         </Grid.RowDefinitions>
 
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="15*"/>
+                                    <RowDefinition Height="40*"/>
+                                </Grid.RowDefinitions>
+
+                                <Border  CornerRadius="25,25,0,0"
+                                         Grid.Row="0"
+                                         Background="Gray">
+                                    <Label Style="{StaticResource InternalLabelStyle}"
+                                           Content="Essentials">
+
+                                    </Label>
+                                </Border>
+
+                                <WrapPanel Grid.Row="1"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center">
+                                    <Border CornerRadius="15"
+                                            Height="70" Width="70"
+                                            Background="LightGray"
+                                            Margin="5,0,5,0"
+                                            x:Name="EssentialDesignElement_GND"
+                                            MouseDown="EssentialDesignElement_GND_MouseDown"
+                                            Cursor="Hand">
+                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\GND.png"/>
+                                    </Border>
+
+                                    <Border CornerRadius="15"
+                                            Height="70" Width="70"
+                                            Background="LightGray"
+                                            Margin="5,0,5,0"
+                                            x:Name="EssentialDesignElement_NameNode">
+                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\NameNode.png"/>
+                                    </Border>
+
+                                    <Border CornerRadius="15"
+                                            Height="70" Width="70"
+                                            Background="LightGray"
+                                            Margin="5,0,5,0"
+                                            x:Name="EssentialDesignElement_Wire">
+                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\Wire.png"/>
+                                    </Border>
+                                </WrapPanel>
+                            </Grid>
+
+                            <Grid Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="15*"/>
+                                    <RowDefinition Height="40*"/>
+                                </Grid.RowDefinitions>
+
+                                <Border  CornerRadius="0,0,0,0"
+                                         Grid.Row="0"
+                                         Background="Gray">
+
+                                    <Label Style="{StaticResource InternalLabelStyle}"
+                                           Content="DC Sources">
+
+                                    </Label>
+                                </Border>
+
+                                <WrapPanel Grid.Row="1"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center">
+                                    <Border CornerRadius="15"
+                                            Height="90" Width="90"
+                                            Background="LightGray"
+                                            Margin="5,0,5,0"
+                                            x:Name="DCSourcesDesigner_VoltageSource">
+                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\VoltageSource.png"/>
+                                    </Border>
+
+                                    <Border CornerRadius="15"
+                                            Height="90" Width="90"
+                                            Background="LightGray"
+                                            Margin="5,0,5,0"
+                                            x:Name="DCSourcesDesigner_CurrentSource">
+                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\CurrentSource.png"/>
+                                    </Border>
+                                </WrapPanel>
+                            </Grid>
+                            <Grid Grid.Row="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="15*"/>
+                                    <RowDefinition Height="40*"/>
+                                </Grid.RowDefinitions>
+
+                                <Border  CornerRadius="0,0,0,0"
+                                         Grid.Row="0"
+                                         Background="Gray">
+
+                                    <Label Style="{StaticResource InternalLabelStyle}"
+                                           Content="Passive Elements">
+
+                                    </Label>
+                                </Border>
+
+                                <WrapPanel Grid.Row="1"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center">
+                                    <Border CornerRadius="15"
+                                            Height="70" Width="70"
+                                            Background="LightGray"
+                                            Margin="5,0,5,0"
+                                            x:Name="PassiveElements_Resistor">
+                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\Resistor.png"/>
+                                    </Border>
+
+                                    <Border CornerRadius="15"
+                                            Height="70" Width="70"
+                                            Background="LightGray"
+                                            Margin="5,0,5,0"
+                                            x:Name="PassiveElements_Capasitor">
+                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\Capasitor.png"/>
+                                    </Border>
+
+                                    <Border CornerRadius="15"
+                                            Height="70" Width="70"
+                                            Background="LightGray"
+                                            Margin="5,0,5,0"
+                                            x:Name="PassiveElements_Inductor">
+                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\Inductor.png"/>
+                                    </Border>
+                                </WrapPanel>
+                            </Grid>
+
+                            <Grid Grid.Row="3">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="15*"/>
+                                    <RowDefinition Height="40*"/>
+                                </Grid.RowDefinitions>
+
+                                <Border  CornerRadius="0,0,0,0"
+                                         Grid.Row="0"
+                                         Background="Gray">
+
+                                    <Label Style="{StaticResource InternalLabelStyle}"
+                                           Content="Switches">
+                                    </Label>
+                                </Border>
+
+                                <WrapPanel Grid.Row="1"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center">
+                                    <Border CornerRadius="15"
+                                            Height="70" Width="70"
+                                            Background="LightGray"
+                                            Margin="5,0,5,0"
+                                            x:Name="Switches_SPSTGate">
+                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\SPSPGate.png"/>
+                                    </Border>
+
+                                    <Border CornerRadius="15"
+                                            Height="70" Width="70"
+                                            Background="LightGray"
+                                            Margin="5,0,5,0"
+                                            x:Name="Switches_SPDTGate">
+                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\SPDTGate.png"/>
+                                    </Border>
+
+                                    <Border CornerRadius="15"
+                                            Height="70" Width="70"
+                                            Background="LightGray"
+                                            Margin="5,0,5,0"
+                                            x:Name="Switches_SPSTRelay">
+                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\SPSTRelay.png"/>
+                                    </Border>
+                                </WrapPanel>
+                            </Grid>
+                        </Grid>
+
                         <Border CornerRadius="0,0,25,25"
                                 Grid.Row="1"
                                 Background="Gray">
-                            <!--ТУТ БУДЕТ ПОИСК-->
                         </Border>
                     </Grid>
                 </Border>
 
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
-                        <!--
-                            Строка для расположения кнопок 
-                            переключения режимов:
-                            редактирование и симуляция
-                        -->
                         <RowDefinition Height="60"/>
                         <RowDefinition Height="289*"/>
                         <RowDefinition Height="39*"/>
