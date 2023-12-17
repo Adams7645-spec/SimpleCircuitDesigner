@@ -22,9 +22,17 @@ namespace SimpleCircuitDesigner
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static bool IsWiringModeEntered = false;
         private bool IsSimulationEntered = false;
         private bool IsItemPanelCollapsed = false;
+        private static bool isSelectionAvailable = true;
         private string BaseImageFolderUri = @"E:\Programm\SimpleCircuitDesigner\ImageSource\";
+        private List<ItemBaseModel> Models = new List<ItemBaseModel>();
+        private List<Endpoint> Endpoints = new List<Endpoint>();
+        private static ItemBaseModel[] selectedPair = new ItemBaseModel[2];
+
+        public static bool IsSelectionAvailable { get { return isSelectionAvailable; } }
+        public static bool WiringMode { get { return IsWiringModeEntered; } }
         public static Canvas? MainItemCanvas { get; private set; }
         public MainWindow()
         {
@@ -44,6 +52,10 @@ namespace SimpleCircuitDesigner
             BottomGrid.Margin = new Thickness(-272, 20, 15, 15);
         }
 
+        private void EssentialDesignElement_Wire_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ChangeWiringMode();
+        }
         private void Button_EnterSimulation_MouseUp(object sender, MouseButtonEventArgs e)
         {
             Button_EnterSimulation.Margin = new Thickness(0, 0, 0, 0);
@@ -70,14 +82,14 @@ namespace SimpleCircuitDesigner
                 BottomGrid.Margin = new Thickness(-272, 15, 15, 15);
             }
         }
-
         private void EssentialDesignElement_GND_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var item = new EssentialItemGND("E:/Programm/SimpleCircuitDesigner/ImageSource/GND.png",
-                                            "Test",
-                                            new Point(ItemField.ActualHeight / 2, ItemField.ActualWidth / 2),
+                                            "GndElement",
+                                            new Point(600, 300),
                                             AuxiliaryEnums.GNDDisplayType.Signal);
             item.CreateModel();
+            Models.Add(item);
         }
 
         private void Button_CloseApp_Click(object sender, RoutedEventArgs e)
@@ -136,6 +148,96 @@ namespace SimpleCircuitDesigner
             {
                 targerBorder.Margin = CollapseMargin;
             }
+        }
+        private void ChangeWiringMode()
+        {
+            try
+            {
+                if (!IsWiringModeEntered)
+                {
+                    EssentialDesignElement_Wire.Background = new SolidColorBrush(Colors.DarkGray);
+                    foreach (var model in Models)
+                    {
+                        foreach (var endpoint in model.Endpoints)
+                        {
+                            Endpoints.Add(endpoint);
+                        }
+                    }
+                    foreach (var endpoint in Endpoints)
+                    {
+                        if (!endpoint.IsConnected)
+                            endpoint.ChangeAccentColor(Brushes.Red);
+                    }
+                    IsWiringModeEntered = true;
+                }
+                else
+                {
+                    foreach (var endpoint in Endpoints)
+                    {
+                        endpoint.ChangeAccentColor(Brushes.DimGray);
+                    }
+                    foreach (var item in Models)
+                    {
+                        item.DropSelection();
+                    }
+                    Endpoints.Clear();
+                    ResetSelection();
+                    EssentialDesignElement_Wire.Background = new SolidColorBrush(Colors.LightGray);
+                    IsWiringModeEntered = false;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public static void SelectItem(object item)
+        {
+            try
+            {
+                if (IsItemSelected((ItemBaseModel)item))
+                {
+                    RemoveItemFromSelection((ItemBaseModel)item);
+                }
+                else if (!IsItemSelected((ItemBaseModel)item))
+                {
+                    AddItemToSelection((ItemBaseModel)item);
+                }
+                UpdateSelectionAvailability();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public void ResetSelection()
+        {
+            selectedPair[0] = null;
+            selectedPair[1] = null;
+            UpdateSelectionAvailability();
+        }
+        private static void UpdateSelectionAvailability()
+        {
+            isSelectionAvailable = selectedPair[0] == null || selectedPair[1] == null;
+            //MessageBox.Show($"Item1: {selectedPair[0]},\nitem2: {selectedPair[1]}, \nAvailability: {isSelectionAvailable}", "Status");
+        }
+        private static bool IsItemSelected(ItemBaseModel item)
+        {
+            return selectedPair[0] == item || selectedPair[1] == item;
+        }
+        private static void RemoveItemFromSelection(ItemBaseModel item)
+        {
+            if (selectedPair[0] == item)
+                selectedPair = new ItemBaseModel[2] { null, selectedPair[1] };
+            else if (selectedPair[1] == item)
+                selectedPair = new ItemBaseModel[2] { selectedPair[0], null };
+        }
+        private static void AddItemToSelection(ItemBaseModel item)
+        {
+            if (selectedPair[0] == null)
+                selectedPair = new ItemBaseModel[2] { item, selectedPair[1]};
+            else if (selectedPair[1] == null)
+                selectedPair = new ItemBaseModel[2] { selectedPair[0], item };
         }
     }
 }

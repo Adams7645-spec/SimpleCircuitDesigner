@@ -204,7 +204,8 @@
                                             Height="70" Width="70"
                                             Background="LightGray"
                                             Margin="5,0,5,0"
-                                            x:Name="EssentialDesignElement_Wire">
+                                            x:Name="EssentialDesignElement_Wire"
+                                            MouseDown="EssentialDesignElement_Wire_MouseDown">
                                         <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\Wire.png"/>
                                     </Border>
                                 </WrapPanel>
