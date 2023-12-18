@@ -76,7 +76,7 @@ namespace SimpleCircuitDesigner
         private void Button_CollapseItemPanel_MouseUp(object sender, MouseButtonEventArgs e)
         {
             IsItemPanelCollapsed = ChangeButtonVisualCondition(IsItemPanelCollapsed, Button_CollapseItemPanel,
-                                   "Right-arrow.png", "left-arrow.png", 
+                                   "ImageSource/Right-arrow.png", "ImageSource/left-arrow.png", 
                                    new Thickness(2.5, 7.5, 7.5, 7.5), new Thickness(7.5, 7.5, 2.5, 7.5));
             CollapseFrameworkElement(new Thickness(0, 0, 300, 0), new Thickness(15), ItemBorder, IsItemPanelCollapsed);
 
@@ -199,7 +199,7 @@ namespace SimpleCircuitDesigner
         private void SetButtonImage(string uri, ToggleButton button, Thickness ImageMargin)
         {
             var PauseImage = new Image();
-            var BitmapImage = new BitmapImage(new Uri(uri));
+            var BitmapImage = new BitmapImage(new Uri(uri, UriKind.Relative));
             PauseImage.Source = BitmapImage;
             PauseImage.Margin = ImageMargin;
             button.Content = PauseImage;
