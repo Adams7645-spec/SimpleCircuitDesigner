@@ -19,17 +19,18 @@ namespace SimpleCircuitDesigner
 {
     internal abstract class ItemBaseModel
     {
-        protected string name;
         protected string imageUri;
         protected Point locationCoordinates;
         protected bool IsSelected;
         protected Image Image;
         protected Border Element;
+        protected string elementImageUri = "";
+        protected bool IsDragging = false;
+        protected Point mouseOffset;
         public List<Endpoint> Endpoints { get; protected set; }
         public Point location { get { return locationCoordinates; } }
-        protected ItemBaseModel(string modelName, string modelImageUri, Point modelCoordinates)
+        protected ItemBaseModel(string modelImageUri, Point modelCoordinates)
         {
-            name = modelName;
             imageUri = modelImageUri;
             locationCoordinates = modelCoordinates;
         }
@@ -40,7 +41,6 @@ namespace SimpleCircuitDesigner
             Image.Stretch = Stretch.Fill;
             Element.Child = Image;
         }
-
         protected void SetImage(SolidColorBrush imageColor, string uri, Border Element)
         {
             BitmapImage bitmapImage = new BitmapImage(new Uri(uri, UriKind.RelativeOrAbsolute));
@@ -59,6 +59,10 @@ namespace SimpleCircuitDesigner
             rectangle.Stretch = Stretch.Fill;
 
             Element.Child = rectangle;
+        }
+        public void ChangeLocation(Point newLocation)
+        {
+            locationCoordinates = newLocation;
         }
         public void ChangeSelection()
         {
@@ -88,10 +92,85 @@ namespace SimpleCircuitDesigner
         public void DropSelection()
         {
             IsSelected = false;
-            MainWindow.SelectItem(null);
             SetImage(imageUri, Image, Element);
         }
-        public abstract void CreateModel();
-        public abstract void DestructModel();
+        public void CreateModel(List<Endpoint> endpoints)
+        {
+            Element = new Border();
+            Element.Width = 75;
+            Element.Height = 75;
+            Element.Background = new SolidColorBrush(Colors.Transparent);
+
+            foreach (var point in endpoints)
+            {
+                Endpoints.Add(point);
+            }
+
+            Canvas.SetLeft(Element, locationCoordinates.X);
+            Canvas.SetTop(Element, locationCoordinates.Y);
+            Canvas.SetZIndex(Element, 1);
+
+            SetImage(elementImageUri, Image, Element);
+
+            Element.MouseDown += Border_MouseDown;
+            Element.MouseMove += Border_MouseMove;
+            Element.MouseUp += Border_MouseUp;
+            Element.KeyDown += Border_KeyDown;
+
+            MainWindow.MainItemCanvas.Children.Add(Element);
+        }
+
+        private void Border_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Back)
+            {
+                MessageBox.Show("Нажата клавиша Backspace!");
+            }
+        }
+        private void Border_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (IsDragging)
+            {
+                Point currentPos = e.GetPosition(MainWindow.MainItemCanvas);
+                double x = currentPos.X - mouseOffset.X;
+                double y = currentPos.Y - mouseOffset.Y;
+                Canvas.SetLeft(Element, x);
+                Canvas.SetTop(Element, y);
+
+                locationCoordinates = new Point(x, y);
+
+                foreach (var point in Endpoints)
+                {
+                    point.EndpointObject.RenderTransform = new TranslateTransform(x + point.Offset.X,
+                                                                                  y + point.Offset.Y);
+                    point.UpdateConnectionWire();
+                    if (point.ConnectedWith != null)
+                    {
+                        point.ConnectedWith.UpdateConnectionWire();
+                    }
+                }
+            }
+        }
+        private void Border_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left && IsDragging)
+            {
+                IsDragging = false;
+                Element.ReleaseMouseCapture();
+            }
+
+            MainWindow.MainItemCanvas.Focus();
+        }
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                IsDragging = true;
+                mouseOffset = e.GetPosition(Element);
+                Element.CaptureMouse();
+
+                ChangeSelection();
+            }
+        }
     }
 }

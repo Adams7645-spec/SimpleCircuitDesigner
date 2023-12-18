@@ -196,7 +196,8 @@
                                             Height="70" Width="70"
                                             Background="LightGray"
                                             Margin="5,0,5,0"
-                                            x:Name="EssentialDesignElement_NameNode">
+                                            x:Name="EssentialDesignElement_NameNode"
+                                            Cursor="Hand">
                                         <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\NameNode.png"/>
                                     </Border>
 
@@ -205,7 +206,8 @@
                                             Background="LightGray"
                                             Margin="5,0,5,0"
                                             x:Name="EssentialDesignElement_Wire"
-                                            MouseDown="EssentialDesignElement_Wire_MouseDown">
+                                            MouseDown="EssentialDesignElement_Wire_MouseDown"
+                                            Cursor="Hand">
                                         <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\Wire.png"/>
                                     </Border>
                                 </WrapPanel>
@@ -234,7 +236,9 @@
                                             Height="90" Width="90"
                                             Background="LightGray"
                                             Margin="5,0,5,0"
-                                            x:Name="DCSourcesDesigner_VoltageSource">
+                                            x:Name="DCSourcesDesigner_VoltageSource"
+                                            Cursor="Hand"
+                                            MouseDown="DCSourcesDesigner_VoltageSource_MouseDown">
                                         <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\VoltageSource.png"/>
                                     </Border>
 
@@ -242,7 +246,9 @@
                                             Height="90" Width="90"
                                             Background="LightGray"
                                             Margin="5,0,5,0"
-                                            x:Name="DCSourcesDesigner_CurrentSource">
+                                            x:Name="DCSourcesDesigner_CurrentSource"
+                                            Cursor="Hand"
+                                            MouseDown="DCSourcesDesigner_CurrentSource_MouseDown">
                                         <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\CurrentSource.png"/>
                                     </Border>
                                 </WrapPanel>
@@ -270,7 +276,9 @@
                                             Height="70" Width="70"
                                             Background="LightGray"
                                             Margin="5,0,5,0"
-                                            x:Name="PassiveElements_Resistor">
+                                            x:Name="PassiveElements_Resistor"
+                                            Cursor="Hand"
+                                            MouseDown="PassiveElements_Resistor_MouseDown">
                                         <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\Resistor.png"/>
                                     </Border>
 
@@ -278,7 +286,9 @@
                                             Height="70" Width="70"
                                             Background="LightGray"
                                             Margin="5,0,5,0"
-                                            x:Name="PassiveElements_Capasitor">
+                                            x:Name="PassiveElements_Capasitor"
+                                            MouseDown="PassiveElements_Capasitor_MouseDown"
+                                            Cursor="Hand">
                                         <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\Capasitor.png"/>
                                     </Border>
 
@@ -286,7 +296,9 @@
                                             Height="70" Width="70"
                                             Background="LightGray"
                                             Margin="5,0,5,0"
-                                            x:Name="PassiveElements_Inductor">
+                                            x:Name="PassiveElements_Inductor"
+                                            MouseDown="PassiveElements_Inductor_MouseDown"
+                                            Cursor="Hand">
                                         <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\Inductor.png"/>
                                     </Border>
                                 </WrapPanel>
@@ -314,15 +326,19 @@
                                             Height="70" Width="70"
                                             Background="LightGray"
                                             Margin="5,0,5,0"
-                                            x:Name="Switches_SPSTGate">
-                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\SPSPGate.png"/>
+                                            x:Name="Switches_SPSTGate"
+                                            MouseDown="Switches_SPSTGate_MouseDown"
+                                            Cursor="Hand">
+                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\SPSTGate.png"/>
                                     </Border>
 
                                     <Border CornerRadius="15"
                                             Height="70" Width="70"
                                             Background="LightGray"
                                             Margin="5,0,5,0"
-                                            x:Name="Switches_SPDTGate">
+                                            x:Name="Switches_SPDTGate"
+                                            MouseDown="Switches_SPDTGate_MouseDown"
+                                            Cursor="Hand">
                                         <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\SPDTGate.png"/>
                                     </Border>
 
@@ -330,7 +346,9 @@
                                             Height="70" Width="70"
                                             Background="LightGray"
                                             Margin="5,0,5,0"
-                                            x:Name="Switches_SPSTRelay">
+                                            x:Name="Switches_SPSTRelay"
+                                            MouseDown="Switches_SPSTRelay_MouseDown"
+                                            Cursor="Hand">
                                         <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\SPSTRelay.png"/>
                                     </Border>
                                 </WrapPanel>
@@ -351,16 +369,67 @@
                         <RowDefinition Height="39*"/>
                     </Grid.RowDefinitions>
 
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="151*"/>
+                            <ColumnDefinition Width="50*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="58*"/>
+                                <RowDefinition Height="175*"/>
+                                <RowDefinition Height="56*"/>
+                            </Grid.RowDefinitions>
+
+                            <Border Style="{StaticResource BorderOfInternalElements}"
+                                    Grid.Row="1"
+                                    CornerRadius="25,0,0,25"
+                                    x:Name="SimulationStatPanel"
+                                    Visibility="Hidden">
+
+                            </Border>
+                        </Grid>
+                    </Grid>
+
                     <Grid Grid.Row="2" Margin="-272,15,15,15"
                           x:Name="BottomGrid">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0*"/>
-                            <ColumnDefinition Width="83*"/>
-                            <ColumnDefinition Width="176*"/>
-                            <ColumnDefinition Width="83*"/>
-                            <ColumnDefinition Width="484*"/>
-                            <ColumnDefinition Width="451*"/>
+                            <ColumnDefinition Width="92*"/>
+                            <ColumnDefinition Width="169*"/>
+                            <ColumnDefinition Width="66*"/>
+                            <ColumnDefinition Width="239*"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="521*"/>
                         </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="5"
+                                Style="{StaticResource BorderOfInternalElements}"
+                                Background="Gray"
+                                x:Name="WiringPanel"
+                                Visibility="Hidden">
+                            <WrapPanel VerticalAlignment="Center"
+                                      HorizontalAlignment="Center"
+                                      Margin="15,0,15,0">
+                                <ToggleButton Style="{StaticResource InternalToggleButtonStyle}"
+                                              Width="35"
+                                              Height="35"
+                                              Margin="10,0,10,0"
+                                              x:Name="WireCreateButton"
+                                              Click="WireCreateButton_Click">
+                                    <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\WireCreate.png"/>
+                                </ToggleButton>
+                                <ToggleButton Style="{StaticResource InternalToggleButtonStyle}"
+                                              Width="35"
+                                              Height="35"
+                                              Margin="10,0,10,0"
+                                              x:Name="WireDeleteButton"
+                                              Click="WireDeleteButton_Click">
+                                    <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\WireDelete.png"/>
+                                </ToggleButton>
+                            </WrapPanel>
+                        </Border>
 
                         <ToggleButton Style="{StaticResource InternalToggleButtonStyle}"
                                       x:Name="Button_CollapseItemPanel"
