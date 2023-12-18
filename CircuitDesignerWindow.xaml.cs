@@ -66,8 +66,8 @@ namespace SimpleCircuitDesigner
         {
             Button_EnterSimulation.Margin = new Thickness(0, 0, 0, 0);
             IsSimulationEntered = ChangeButtonVisualCondition(IsSimulationEntered, Button_EnterSimulation, 
-                "pack://application:,,,/SimpleCircuitDesigner;component/ImageSource/PauseButton.png",
-                "pack://application:,,,/SimpleCircuitDesigner;component/ImageSource/PlayButton.png", 
+                "/ImageSource/PauseButton.png",
+                "/ImageSource/PlayButton.png", 
                        new Thickness(10));
 
             if (IsSimulationEntered)
@@ -78,8 +78,8 @@ namespace SimpleCircuitDesigner
         private void Button_CollapseItemPanel_MouseUp(object sender, MouseButtonEventArgs e)
         {
             IsItemPanelCollapsed = ChangeButtonVisualCondition(IsItemPanelCollapsed, Button_CollapseItemPanel,
-                                   "pack://application:,,,/SimpleCircuitDesigner;component/ImageSource/Right-arrow.png",
-                                   "pack://application:,,,/SimpleCircuitDesigner;component/ImageSource/left-arrow.png", 
+                                   "/ImageSource/Right-arrow.png",
+                                   "/ImageSource/left-arrow.png", 
                                    new Thickness(2.5, 7.5, 7.5, 7.5), new Thickness(7.5, 7.5, 2.5, 7.5));
             CollapseFrameworkElement(new Thickness(0, 0, 300, 0), new Thickness(15), ItemBorder, IsItemPanelCollapsed);
 
