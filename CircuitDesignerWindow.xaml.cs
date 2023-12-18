@@ -24,12 +24,13 @@ namespace SimpleCircuitDesigner
     {
         private static bool IsWiringModeEntered = false;
         private bool IsSimulationEntered = false;
+        private static bool IsItemDeletionModeEntered = false;
         private bool IsItemPanelCollapsed = false;
         private static bool isSelectionAvailable = true;
-        private string BaseImageFolderUri = @"E:\Programm\SimpleCircuitDesigner\ImageSource\";
         private List<ItemBaseModel> Models = new List<ItemBaseModel>();
         private List<Endpoint> Endpoints = new List<Endpoint>();
         private static Dictionary<int, ItemBaseModel> selectedItems = new Dictionary<int, ItemBaseModel>();
+        public static bool IsDeletionModeEntered { get { return IsItemDeletionModeEntered; } }
         public static bool IsSelectionAvailable { get { return isSelectionAvailable; } }
         public static bool WiringMode { get { return IsWiringModeEntered; } }
         public static Canvas? MainItemCanvas { get; private set; }
@@ -40,6 +41,14 @@ namespace SimpleCircuitDesigner
             ItemField.Focus();
 
             MainItemCanvas = ItemField;
+        }
+        private void DeleteItemButton_Click(object sender, RoutedEventArgs e)
+        {
+            IsItemDeletionModeEntered = !IsItemDeletionModeEntered;
+            if (IsItemDeletionModeEntered)
+                this.Cursor = Cursors.Cross;
+            else
+                this.Cursor = Cursors.Arrow;
         }
         private void Button_EnterSimulation_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -56,8 +65,7 @@ namespace SimpleCircuitDesigner
         private void Button_EnterSimulation_MouseUp(object sender, MouseButtonEventArgs e)
         {
             Button_EnterSimulation.Margin = new Thickness(0, 0, 0, 0);
-            IsSimulationEntered = ChangeButtonVisualCondition(IsSimulationEntered, Button_EnterSimulation,
-                       BaseImageFolderUri, "PauseButton.png", "PlayButton.png", 
+            IsSimulationEntered = ChangeButtonVisualCondition(IsSimulationEntered, Button_EnterSimulation, "ImageSource/PauseButton.png", "ImageSource/PlayButton.png", 
                        new Thickness(10));
 
             if (IsSimulationEntered)
@@ -68,7 +76,7 @@ namespace SimpleCircuitDesigner
         private void Button_CollapseItemPanel_MouseUp(object sender, MouseButtonEventArgs e)
         {
             IsItemPanelCollapsed = ChangeButtonVisualCondition(IsItemPanelCollapsed, Button_CollapseItemPanel,
-                                   BaseImageFolderUri, "Right-arrow.png", "left-arrow.png", 
+                                   "Right-arrow.png", "left-arrow.png", 
                                    new Thickness(2.5, 7.5, 7.5, 7.5), new Thickness(7.5, 7.5, 2.5, 7.5));
             CollapseFrameworkElement(new Thickness(0, 0, 300, 0), new Thickness(15), ItemBorder, IsItemPanelCollapsed);
 
@@ -116,39 +124,39 @@ namespace SimpleCircuitDesigner
         }
         private void EssentialDesignElement_GND_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Models.Add(new EssentialItemGND(BaseImageFolderUri + "GND.png", new Point(600, 300)));
+            Models.Add(new EssentialItemGND("ImageSource/GND.png", new Point(600, 300)));
         }
         private void DCSourcesDesigner_VoltageSource_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Models.Add(new DCSourcesVoltageSource(BaseImageFolderUri + "VoltageSource.png", new Point(600, 300), 1));
+            Models.Add(new DCSourcesVoltageSource("ImageSource/VoltageSource.png", new Point(600, 300), 1));
         }
         private void DCSourcesDesigner_CurrentSource_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Models.Add(new DCSourcesVoltageSource(BaseImageFolderUri + "CurrentSource.png", new Point(600, 300), 1));
+            Models.Add(new DCSourcesVoltageSource("ImageSource/CurrentSource.png", new Point(600, 300), 1));
         }
         private void PassiveElements_Resistor_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Models.Add(new PassiveItemResistor(BaseImageFolderUri + "Resistor.png", new Point(600, 300), 1));
+            Models.Add(new PassiveItemResistor("ImageSource/Resistor.png", new Point(600, 300), 1));
         }
         private void PassiveElements_Capasitor_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Models.Add(new PassiveItemCapasitor(BaseImageFolderUri + "Capasitor.png", new Point(600, 300), 1));
+            Models.Add(new PassiveItemCapasitor("ImageSource/Capasitor.png", new Point(600, 300), 1));
         }
         private void PassiveElements_Inductor_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Models.Add(new PassiveItemInductor(BaseImageFolderUri + "Inductor.png", new Point(600, 300), 1));
+            Models.Add(new PassiveItemInductor("ImageSource/Inductor.png", new Point(600, 300), 1));
         }
         private void Switches_SPSTGate_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Models.Add(new SwitchesSPSTGate(BaseImageFolderUri + "SPSTGate.png", new Point(600, 300)));
+            Models.Add(new SwitchesSPSTGate("ImageSource/SPSTGate.png", new Point(600, 300)));
         }
         private void Switches_SPDTGate_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Models.Add(new SwitchesSPDTGate(BaseImageFolderUri + "SPDTGate.png", new Point(600, 300)));
+            Models.Add(new SwitchesSPDTGate("ImageSource/SPDTGate.png", new Point(600, 300)));
         }
         private void Switches_SPSTRelay_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Models.Add(new SwitchesSPSTRelay(BaseImageFolderUri + "SPSTRelay.png", new Point(600, 300)));
+            Models.Add(new SwitchesSPSTRelay("ImageSource/SPSTRelay.png", new Point(600, 300)));
         }
         private void Button_CloseApp_Click(object sender, RoutedEventArgs e)
         {
@@ -160,31 +168,31 @@ namespace SimpleCircuitDesigner
         //          Auxiliary Handlers            //
         //                                        //
 
-        private bool ChangeButtonVisualCondition(bool condition, ToggleButton button, string folderUri, string trueImage, string falseImage, Thickness ImageMargin)
+        private bool ChangeButtonVisualCondition(bool condition, ToggleButton button, string trueImage, string falseImage, Thickness ImageMargin)
         {
             if (condition != true)
             {
                 condition = true;
-                SetButtonImage(folderUri + trueImage, button, ImageMargin);
+                SetButtonImage(trueImage, button, ImageMargin);
             }
             else
             {
                 condition = false;
-                SetButtonImage(folderUri + falseImage, button, ImageMargin);
+                SetButtonImage(falseImage, button, ImageMargin);
             }
             return condition;
         }
-        private bool ChangeButtonVisualCondition(bool condition, ToggleButton button, string folderUri, string trueImage, string falseImage, Thickness ImageMargin, Thickness ImageAditionalMargin)
+        private bool ChangeButtonVisualCondition(bool condition, ToggleButton button, string trueImage, string falseImage, Thickness ImageMargin, Thickness ImageAditionalMargin)
         {
             if (condition != true)
             {
                 condition = true;
-                SetButtonImage(folderUri + trueImage, button, ImageAditionalMargin);
+                SetButtonImage(trueImage, button, ImageAditionalMargin);
             }
             else
             {
                 condition = false;
-                SetButtonImage(folderUri + falseImage, button, ImageMargin);
+                SetButtonImage(falseImage, button, ImageMargin);
             }
             return condition;
         }

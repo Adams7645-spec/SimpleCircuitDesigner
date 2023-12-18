@@ -119,7 +119,6 @@ namespace SimpleCircuitDesigner
 
             MainWindow.MainItemCanvas.Children.Add(Element);
         }
-
         private void Border_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Back)
@@ -163,6 +162,11 @@ namespace SimpleCircuitDesigner
         }
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            if (MainWindow.IsDeletionModeEntered)
+            {
+                DestructItem();
+                return;
+            }
             if (e.ChangedButton == MouseButton.Left)
             {
                 IsDragging = true;
@@ -171,6 +175,16 @@ namespace SimpleCircuitDesigner
 
                 ChangeSelection();
             }
+        }
+        public void DestructItem()
+        {
+            foreach (var point in Endpoints)
+            {
+                point.Disconnect();
+                MainWindow.MainItemCanvas.Children.Remove(point.EndpointObject);
+            }
+            ChangeSelection();
+            MainWindow.MainItemCanvas.Children.Remove(Element);
         }
     }
 }

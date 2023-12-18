@@ -15,7 +15,7 @@
         ResizeMode="NoResize"
         WindowState="Minimized"
         WindowStartupLocation="CenterScreen">
-
+    
     <Window.Resources>
         <Style TargetType="Border"
                    x:Key="MainWindowBorderStyle">
@@ -189,7 +189,7 @@
                                             x:Name="EssentialDesignElement_GND"
                                             MouseDown="EssentialDesignElement_GND_MouseDown"
                                             Cursor="Hand">
-                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\GND.png"/>
+                                        <Image Source="\ImageSource\GND.png"/>
                                     </Border>
 
                                     <Border CornerRadius="15"
@@ -198,7 +198,7 @@
                                             Margin="5,0,5,0"
                                             x:Name="EssentialDesignElement_NameNode"
                                             Cursor="Hand">
-                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\NameNode.png"/>
+                                        <Image Source="ImageSource\NameNode.png"/>
                                     </Border>
 
                                     <Border CornerRadius="15"
@@ -208,7 +208,7 @@
                                             x:Name="EssentialDesignElement_Wire"
                                             MouseDown="EssentialDesignElement_Wire_MouseDown"
                                             Cursor="Hand">
-                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\Wire.png"/>
+                                        <Image Source="\ImageSource\Wire.png"/>
                                     </Border>
                                 </WrapPanel>
                             </Grid>
@@ -239,7 +239,7 @@
                                             x:Name="DCSourcesDesigner_VoltageSource"
                                             Cursor="Hand"
                                             MouseDown="DCSourcesDesigner_VoltageSource_MouseDown">
-                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\VoltageSource.png"/>
+                                        <Image Source="\ImageSource\VoltageSource.png"/>
                                     </Border>
 
                                     <Border CornerRadius="15"
@@ -249,7 +249,7 @@
                                             x:Name="DCSourcesDesigner_CurrentSource"
                                             Cursor="Hand"
                                             MouseDown="DCSourcesDesigner_CurrentSource_MouseDown">
-                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\CurrentSource.png"/>
+                                        <Image Source="\ImageSource\CurrentSource.png"/>
                                     </Border>
                                 </WrapPanel>
                             </Grid>
@@ -279,7 +279,7 @@
                                             x:Name="PassiveElements_Resistor"
                                             Cursor="Hand"
                                             MouseDown="PassiveElements_Resistor_MouseDown">
-                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\Resistor.png"/>
+                                        <Image Source="\ImageSource\Resistor.png"/>
                                     </Border>
 
                                     <Border CornerRadius="15"
@@ -289,7 +289,7 @@
                                             x:Name="PassiveElements_Capasitor"
                                             MouseDown="PassiveElements_Capasitor_MouseDown"
                                             Cursor="Hand">
-                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\Capasitor.png"/>
+                                        <Image Source="\ImageSource\Capasitor.png"/>
                                     </Border>
 
                                     <Border CornerRadius="15"
@@ -299,7 +299,7 @@
                                             x:Name="PassiveElements_Inductor"
                                             MouseDown="PassiveElements_Inductor_MouseDown"
                                             Cursor="Hand">
-                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\Inductor.png"/>
+                                        <Image Source="\ImageSource\Inductor.png"/>
                                     </Border>
                                 </WrapPanel>
                             </Grid>
@@ -329,7 +329,7 @@
                                             x:Name="Switches_SPSTGate"
                                             MouseDown="Switches_SPSTGate_MouseDown"
                                             Cursor="Hand">
-                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\SPSTGate.png"/>
+                                        <Image Source="\ImageSource\SPSTGate.png"/>
                                     </Border>
 
                                     <Border CornerRadius="15"
@@ -339,7 +339,7 @@
                                             x:Name="Switches_SPDTGate"
                                             MouseDown="Switches_SPDTGate_MouseDown"
                                             Cursor="Hand">
-                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\SPDTGate.png"/>
+                                        <Image Source="\ImageSource\SPDTGate.png"/>
                                     </Border>
 
                                     <Border CornerRadius="15"
@@ -349,7 +349,7 @@
                                             x:Name="Switches_SPSTRelay"
                                             MouseDown="Switches_SPSTRelay_MouseDown"
                                             Cursor="Hand">
-                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\SPSTRelay.png"/>
+                                        <Image Source="\ImageSource\SPSTRelay.png"/>
                                     </Border>
                                 </WrapPanel>
                             </Grid>
@@ -358,6 +358,17 @@
                         <Border CornerRadius="0,0,25,25"
                                 Grid.Row="1"
                                 Background="Gray">
+                            <WrapPanel HorizontalAlignment="Center"
+                                       VerticalAlignment="Center">
+                                <ToggleButton Style="{StaticResource InternalToggleButtonStyle}"
+                                              Width="50"
+                                              Height="50"
+                                              x:Name="DeleteItemButton"
+                                              Click="DeleteItemButton_Click">
+                                    <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\Bin.png"
+                                           Margin="5"/>
+                                </ToggleButton>
+                            </WrapPanel>
                         </Border>
                     </Grid>
                 </Border>
@@ -438,7 +449,7 @@
                                       Grid.Column="3"
                                       Margin="15,0,0,0">
                             <ToggleButton.Content>
-                                <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\left-arrow.png"
+                                <Image Source="\ImageSource\left-arrow.png"
                                                Margin="2.5,7.5,7.5,7.5"/>
                             </ToggleButton.Content>
                         </ToggleButton>
@@ -464,7 +475,7 @@
                                               MouseDown="Button_EnterSimulation_MouseDown"
                                               MouseUp="Button_EnterSimulation_MouseUp">
                                     <ToggleButton.Content>
-                                        <Image Source="E:\Programm\SimpleCircuitDesigner\ImageSource\PlayButton.png"
+                                        <Image Source="\ImageSource\PlayButton.png"
                                                Margin="10"/>
                                     </ToggleButton.Content>
                                 </ToggleButton>
@@ -483,6 +494,8 @@
                                           Margin="0,0,15,0"
                                           x:Name="Button_CloseApp"
                                           Click="Button_CloseApp_Click">
+                                <Image Source="\ImageSource\ExitButton.png"
+                                       Margin="5,5,0,5"/>
                             </ToggleButton>
                         </Border>
                     </Grid>

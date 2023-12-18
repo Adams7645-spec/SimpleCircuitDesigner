@@ -8,10 +8,54 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ImageSource\Bin.png" />
+    <None Remove="ImageSource\Capasitor.png" />
+    <None Remove="ImageSource\CurrentSource.png" />
+    <None Remove="ImageSource\ExitButton.png" />
+    <None Remove="ImageSource\GND.png" />
+    <None Remove="ImageSource\Inductor.png" />
+    <None Remove="ImageSource\left-arrow.png" />
+    <None Remove="ImageSource\NameNode.png" />
+    <None Remove="ImageSource\PauseButton.png" />
+    <None Remove="ImageSource\PlayButton.png" />
+    <None Remove="ImageSource\Resistor.png" />
+    <None Remove="ImageSource\Right-arrow.png" />
+    <None Remove="ImageSource\SPDTGate.png" />
+    <None Remove="ImageSource\SPSTGate.png" />
+    <None Remove="ImageSource\SPSTRelay.png" />
+    <None Remove="ImageSource\VoltageSource.png" />
+    <None Remove="ImageSource\Wire.png" />
+    <None Remove="ImageSource\WireCreate.png" />
+    <None Remove="ImageSource\WireDelete.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Costura.Fody" Version="5.7.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="ImageSource\Bin.png" />
+    <Resource Include="ImageSource\Capasitor.png" />
+    <Resource Include="ImageSource\CurrentSource.png" />
+    <Resource Include="ImageSource\ExitButton.png" />
+    <Resource Include="ImageSource\GND.png" />
+    <Resource Include="ImageSource\Inductor.png" />
+    <Resource Include="ImageSource\left-arrow.png" />
+    <Resource Include="ImageSource\NameNode.png" />
+    <Resource Include="ImageSource\PauseButton.png" />
+    <Resource Include="ImageSource\PlayButton.png" />
+    <Resource Include="ImageSource\Resistor.png" />
+    <Resource Include="ImageSource\Right-arrow.png" />
+    <Resource Include="ImageSource\SPDTGate.png" />
+    <Resource Include="ImageSource\SPSTGate.png" />
+    <Resource Include="ImageSource\SPSTRelay.png" />
+    <Resource Include="ImageSource\VoltageSource.png" />
+    <Resource Include="ImageSource\Wire.png" />
+    <Resource Include="ImageSource\WireCreate.png" />
+    <Resource Include="ImageSource\WireDelete.png" />
   </ItemGroup>
 
 </Project>

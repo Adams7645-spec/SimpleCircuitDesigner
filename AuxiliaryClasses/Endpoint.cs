@@ -56,10 +56,6 @@ namespace SimpleCircuitDesigner
                 connectTo.InitializeConnectionWire();
 
                 UpdateConnectionWire();
-
-                //MessageBox.Show($"Base endpoint:\n    location: {BaseItem.location}\n    hashcode: {BaseItem.GetHashCode()}\n    offset: {Offset}\n    connected: {IsConnected}\n    " +
-                //    $"connected with: {ConnectedWith}\nConnected endpoint:\n    location: {ConnectedWith.BaseItem.location}\n    hashcode: {ConnectedWith.BaseItem.GetHashCode()}\n    offset: {ConnectedWith.Offset}\n    " +
-                //    $"connected: {ConnectedWith.IsConnected}\n    connected with: {ConnectedWith.ConnectedWith}", "Status");
             }
         }
         private void ConnectResponse(Endpoint connectTo)
