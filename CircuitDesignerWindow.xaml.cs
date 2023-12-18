@@ -65,7 +65,9 @@ namespace SimpleCircuitDesigner
         private void Button_EnterSimulation_MouseUp(object sender, MouseButtonEventArgs e)
         {
             Button_EnterSimulation.Margin = new Thickness(0, 0, 0, 0);
-            IsSimulationEntered = ChangeButtonVisualCondition(IsSimulationEntered, Button_EnterSimulation, "ImageSource/PauseButton.png", "ImageSource/PlayButton.png", 
+            IsSimulationEntered = ChangeButtonVisualCondition(IsSimulationEntered, Button_EnterSimulation, 
+                "pack://application:,,,/SimpleCircuitDesigner;component/ImageSource/PauseButton.png",
+                "pack://application:,,,/SimpleCircuitDesigner;component/ImageSource/PlayButton.png", 
                        new Thickness(10));
 
             if (IsSimulationEntered)
@@ -76,7 +78,8 @@ namespace SimpleCircuitDesigner
         private void Button_CollapseItemPanel_MouseUp(object sender, MouseButtonEventArgs e)
         {
             IsItemPanelCollapsed = ChangeButtonVisualCondition(IsItemPanelCollapsed, Button_CollapseItemPanel,
-                                   "ImageSource/Right-arrow.png", "ImageSource/left-arrow.png", 
+                                   "pack://application:,,,/SimpleCircuitDesigner;component/ImageSource/Right-arrow.png",
+                                   "pack://application:,,,/SimpleCircuitDesigner;component/ImageSource/left-arrow.png", 
                                    new Thickness(2.5, 7.5, 7.5, 7.5), new Thickness(7.5, 7.5, 2.5, 7.5));
             CollapseFrameworkElement(new Thickness(0, 0, 300, 0), new Thickness(15), ItemBorder, IsItemPanelCollapsed);
 
@@ -124,39 +127,39 @@ namespace SimpleCircuitDesigner
         }
         private void EssentialDesignElement_GND_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Models.Add(new EssentialItemGND("ImageSource/GND.png", new Point(600, 300)));
+            Models.Add(new EssentialItemGND("pack://application:,,,/SimpleCircuitDesigner;component/ImageSource/GND.png", new Point(600, 300)));
         }
         private void DCSourcesDesigner_VoltageSource_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Models.Add(new DCSourcesVoltageSource("ImageSource/VoltageSource.png", new Point(600, 300), 1));
+            Models.Add(new DCSourcesVoltageSource("pack://application:,,,/SimpleCircuitDesigner;component/ImageSource/VoltageSource.png", new Point(600, 300), 1));
         }
         private void DCSourcesDesigner_CurrentSource_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Models.Add(new DCSourcesVoltageSource("ImageSource/CurrentSource.png", new Point(600, 300), 1));
+            Models.Add(new DCSourcesVoltageSource("pack://application:,,,/SimpleCircuitDesigner;component/ImageSource/CurrentSource.png", new Point(600, 300), 1));
         }
         private void PassiveElements_Resistor_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Models.Add(new PassiveItemResistor("ImageSource/Resistor.png", new Point(600, 300), 1));
+            Models.Add(new PassiveItemResistor("pack://application:,,,/SimpleCircuitDesigner;component/ImageSource/Resistor.png", new Point(600, 300), 1));
         }
         private void PassiveElements_Capasitor_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Models.Add(new PassiveItemCapasitor("ImageSource/Capasitor.png", new Point(600, 300), 1));
+            Models.Add(new PassiveItemCapasitor("pack://application:,,,/SimpleCircuitDesigner;component/ImageSource/Capasitor.png", new Point(600, 300), 1));
         }
         private void PassiveElements_Inductor_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Models.Add(new PassiveItemInductor("ImageSource/Inductor.png", new Point(600, 300), 1));
+            Models.Add(new PassiveItemInductor("pack://application:,,,/SimpleCircuitDesigner;component/ImageSource/Inductor.png", new Point(600, 300), 1));
         }
         private void Switches_SPSTGate_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Models.Add(new SwitchesSPSTGate("ImageSource/SPSTGate.png", new Point(600, 300)));
+            Models.Add(new SwitchesSPSTGate("pack://application:,,,/SimpleCircuitDesigner;component/ImageSource/SPSTGate.png", new Point(600, 300)));
         }
         private void Switches_SPDTGate_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Models.Add(new SwitchesSPDTGate("ImageSource/SPDTGate.png", new Point(600, 300)));
+            Models.Add(new SwitchesSPDTGate("pack://application:,,,/SimpleCircuitDesigner;component/ImageSource/SPDTGate.png", new Point(600, 300)));
         }
         private void Switches_SPSTRelay_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Models.Add(new SwitchesSPSTRelay("ImageSource/SPSTRelay.png", new Point(600, 300)));
+            Models.Add(new SwitchesSPSTRelay("pack://application:,,,/SimpleCircuitDesigner;component/ImageSource/SPSTRelay.png", new Point(600, 300)));
         }
         private void Button_CloseApp_Click(object sender, RoutedEventArgs e)
         {

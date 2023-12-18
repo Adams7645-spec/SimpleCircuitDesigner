@@ -34,16 +34,16 @@ namespace SimpleCircuitDesigner
             imageUri = modelImageUri;
             locationCoordinates = modelCoordinates;
         }
-        protected void SetImage(string uri, Image Image, Border Element)
+        protected void SetImage(Image Image, Border Element)
         {
-            BitmapImage bitmapImage = new BitmapImage(new Uri(uri, UriKind.RelativeOrAbsolute));
+            BitmapImage bitmapImage = new BitmapImage(new Uri(imageUri, UriKind.RelativeOrAbsolute));
             Image.Source = bitmapImage;
             Image.Stretch = Stretch.Fill;
             Element.Child = Image;
         }
-        protected void SetImage(SolidColorBrush imageColor, string uri, Border Element)
+        protected void SetImage(SolidColorBrush imageColor, Border Element)
         {
-            BitmapImage bitmapImage = new BitmapImage(new Uri(uri, UriKind.RelativeOrAbsolute));
+            BitmapImage bitmapImage = new BitmapImage(new Uri(imageUri, UriKind.RelativeOrAbsolute));
 
             ImageBrush imageBrush = new ImageBrush(bitmapImage);
             imageBrush.Stretch = Stretch.Fill;
@@ -76,9 +76,9 @@ namespace SimpleCircuitDesigner
                         MainWindow.SelectItem(this);
 
                         if (IsSelected)
-                            SetImage(new SolidColorBrush(Colors.Red), imageUri, Element);
+                            SetImage(new SolidColorBrush(Colors.Red), Element);
                         else
-                            SetImage(imageUri, Image, Element);
+                            SetImage(Image, Element);
                     }
                 }
             }
@@ -86,13 +86,13 @@ namespace SimpleCircuitDesigner
             {
                 IsSelected = false;
                 MainWindow.SelectItem(this);
-                SetImage(imageUri, Image, Element);
+                SetImage(Image, Element);
             }
         }
         public void DropSelection()
         {
             IsSelected = false;
-            SetImage(imageUri, Image, Element);
+            SetImage(Image, Element);
         }
         public void CreateModel(List<Endpoint> endpoints)
         {
@@ -110,7 +110,7 @@ namespace SimpleCircuitDesigner
             Canvas.SetTop(Element, locationCoordinates.Y);
             Canvas.SetZIndex(Element, 1);
 
-            SetImage(elementImageUri, Image, Element);
+            SetImage(Image, Element);
 
             Element.MouseDown += Border_MouseDown;
             Element.MouseMove += Border_MouseMove;
