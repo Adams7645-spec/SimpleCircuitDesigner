@@ -29,8 +29,14 @@ namespace SimpleCircuitDesigner
             IsSelected = false;
             Image = new Image();
             Endpoints = new List<Endpoint>();
+            InfoBorder = CreateInfoBorder(("Grounded: ", this, IsGrounded, this.GetType()));
 
             CreateModel(new List<Endpoint> { new Endpoint(this, new Point(36.7, 4)) });
+        }
+        public void SetGrouded(bool isGrounded)
+        {
+            IsGrounded = isGrounded;
+            MessageBox.Show($"Is grounded set as: {isGrounded}");
         }
     }
 }

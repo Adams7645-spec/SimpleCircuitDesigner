@@ -28,6 +28,7 @@ namespace SimpleCircuitDesigner
             Image = new Image();
             this.Amperage = Amperage;
             Endpoints = new List<Endpoint>();
+            InfoBorder = CreateInfoBorder(("Amperage: ", this, Amperage, this.GetType()));
 
             CreateModel(new List<Endpoint> { new Endpoint(this, new Point(36.4, 0)),
                                              new Endpoint(this, new Point(36.4, 72)) });
@@ -35,6 +36,7 @@ namespace SimpleCircuitDesigner
         public void SetAmperage(int Amperage)
         {
             this.Amperage = Amperage;
+            MessageBox.Show($"Amperage on element set as: {Amperage}");
         }
     }
 }

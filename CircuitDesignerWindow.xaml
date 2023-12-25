@@ -47,7 +47,7 @@
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="Effect">
                 <Setter.Value>
-                    <DropShadowEffect Color="Black" 
+                    <DropShadowEffect Color="Black"
                                       Direction="240"
                                       ShadowDepth="5"
                                       BlurRadius="5"
@@ -175,7 +175,6 @@
                                          Background="Gray">
                                     <Label Style="{StaticResource InternalLabelStyle}"
                                            Content="Essentials">
-
                                     </Label>
                                 </Border>
 
@@ -197,7 +196,8 @@
                                             Background="LightGray"
                                             Margin="5,0,5,0"
                                             x:Name="EssentialDesignElement_NameNode"
-                                            Cursor="Hand">
+                                            Cursor="Hand"
+                                            MouseDown="EssentialDesignElement_NameNode_MouseDown">
                                         <Image Source="ImageSource\NameNode.png"/>
                                     </Border>
 

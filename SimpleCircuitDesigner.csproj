@@ -23,6 +23,7 @@
     <None Remove="ImageSource\SPDTGate.png" />
     <None Remove="ImageSource\SPSTGate.png" />
     <None Remove="ImageSource\SPSTRelay.png" />
+    <None Remove="ImageSource\Transparent.png" />
     <None Remove="ImageSource\VoltageSource.png" />
     <None Remove="ImageSource\Wire.png" />
     <None Remove="ImageSource\WireCreate.png" />
@@ -52,6 +53,7 @@
     <Resource Include="ImageSource\SPDTGate.png" />
     <Resource Include="ImageSource\SPSTGate.png" />
     <Resource Include="ImageSource\SPSTRelay.png" />
+    <Resource Include="ImageSource\Transparent.png" />
     <Resource Include="ImageSource\VoltageSource.png" />
     <Resource Include="ImageSource\Wire.png" />
     <Resource Include="ImageSource\WireCreate.png" />

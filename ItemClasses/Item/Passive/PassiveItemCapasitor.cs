@@ -28,6 +28,7 @@ namespace SimpleCircuitDesigner
             Image = new Image();
             Endpoints = new List<Endpoint>();
             this.Farad = Farad;
+            InfoBorder = CreateInfoBorder(("Farad: ", this, Farad, this.GetType()));
 
             CreateModel(new List<Endpoint> { new Endpoint(this, new Point(36.6, 0)),
                                              new Endpoint(this, new Point(36.6, 72)) });
@@ -35,6 +36,7 @@ namespace SimpleCircuitDesigner
         public void SetFarad(int Farad)
         {
             this.Farad = Farad;
+            MessageBox.Show($"Farad on element set as: {Farad}");
         }
     }
 }

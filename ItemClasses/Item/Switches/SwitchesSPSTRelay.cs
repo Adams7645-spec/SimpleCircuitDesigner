@@ -14,11 +14,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections;
+using System.Windows.Media.Converters;
 
 namespace SimpleCircuitDesigner
 {
     internal class SwitchesSPSTRelay : ItemBaseModel
     {
+        private int Ohm;
+        private bool IsClosed;
         public SwitchesSPSTRelay(string modelImageUri, Point modelCoordinates) : base(modelImageUri, modelCoordinates)
         {
             elementImageUri = modelImageUri;
@@ -26,11 +29,23 @@ namespace SimpleCircuitDesigner
             IsSelected = false;
             Image = new Image();
             Endpoints = new List<Endpoint>();
+            InfoBorder = CreateInfoBorder(("Ohm: ", this, Ohm, this.GetType()), 
+                                          ("Is closed: ", this, IsClosed, this.GetType()));
 
             CreateModel(new List<Endpoint> { new Endpoint(this, new Point(15.4, 3)),
                                              new Endpoint(this, new Point(15.4, 70)),
                                              new Endpoint(this, new Point(46.3, 3)),
                                              new Endpoint(this, new Point(46.3, 70)) });
+        }
+        public void SetOhm(int ohm)
+        {
+            Ohm = ohm;
+            MessageBox.Show($"Ohm on element set as: {Ohm}");
+        }
+        public void SetIsClosed(bool isClosed)
+        {
+            IsClosed = isClosed;
+            MessageBox.Show($"Gate close set as: {IsClosed}");
         }
     }
 }

@@ -28,6 +28,7 @@ namespace SimpleCircuitDesigner
             Image = new Image();
             Endpoints = new List<Endpoint>();
             this.Henry = Henry;
+            InfoBorder = CreateInfoBorder(("Henry: ", this, Henry, this.GetType()));
 
             CreateModel(new List<Endpoint> { new Endpoint(this, new Point(36.9, 0)),
                                              new Endpoint(this, new Point(36.9, 72)) });
@@ -35,6 +36,7 @@ namespace SimpleCircuitDesigner
         public void SetHenry(int Henry)
         {
             this.Henry = Henry;
+            MessageBox.Show($"Henry on element set as: {Henry}");
         }
     }
 }

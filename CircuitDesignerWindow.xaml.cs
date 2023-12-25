@@ -129,6 +129,10 @@ namespace SimpleCircuitDesigner
         {
             Models.Add(new EssentialItemGND("pack://application:,,,/SimpleCircuitDesigner;component/ImageSource/GND.png", new Point(600, 300)));
         }
+        private void EssentialDesignElement_NameNode_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Models.Add(new EssentialNameNode("pack://application:,,,/SimpleCircuitDesigner;component/ImageSource/Transparent.png", new Point(600, 300)));
+        }
         private void DCSourcesDesigner_VoltageSource_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Models.Add(new DCSourcesVoltageSource("pack://application:,,,/SimpleCircuitDesigner;component/ImageSource/VoltageSource.png", new Point(600, 300), 1));
@@ -227,6 +231,7 @@ namespace SimpleCircuitDesigner
                     EssentialDesignElement_Wire.Background = new SolidColorBrush(Colors.DarkGray);
                     foreach (var model in Models)
                     {
+                        model.BaseElement.Cursor = Cursors.Hand;
                         foreach (var endpoint in model.Endpoints)
                         {
                             Endpoints.Add(endpoint);
@@ -246,9 +251,10 @@ namespace SimpleCircuitDesigner
                     {
                         endpoint.ChangeAccentColor(Brushes.DimGray);
                     }
-                    foreach (var item in Models)
+                    foreach (var model in Models)
                     {
-                        item.DropSelection();
+                        model.DropSelection();
+                        model.BaseElement.Cursor = Cursors.ScrollAll;
                     }
                     Endpoints.Clear();
                     ResetSelection();

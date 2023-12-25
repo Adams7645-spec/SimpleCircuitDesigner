@@ -28,6 +28,7 @@ namespace SimpleCircuitDesigner
             Image = new Image();
             Endpoints = new List<Endpoint>();
             this.Ohm = Ohm;
+            InfoBorder = CreateInfoBorder(("Ohm: ", this, Ohm, this.GetType()));
 
             CreateModel(new List<Endpoint> { new Endpoint(this, new Point(37.5, 0)),
                                              new Endpoint(this, new Point(37.5, 72)) });
@@ -35,6 +36,7 @@ namespace SimpleCircuitDesigner
         public void SetOhm(int Ohm)
         {
             this.Ohm = Ohm;
+            MessageBox.Show($"Ohm on element set as: {Ohm}");
         }
     }
 }

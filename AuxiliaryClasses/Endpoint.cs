@@ -93,6 +93,13 @@ namespace SimpleCircuitDesigner
 
             ConnectedWith = null;
         }
+        public void ReplaceEndpoint(Point newOffset)
+        {
+            Offset = newOffset;
+            EndpointObject.RenderTransform = new TranslateTransform(BaseItem.location.X + Offset.X,
+                                                                    BaseItem.location.Y + Offset.Y);
+            UpdateConnectionWire();
+        }
         public void UpdateConnectionWire()
         {
             if (IsConnected)

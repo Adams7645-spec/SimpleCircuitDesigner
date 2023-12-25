@@ -19,6 +19,7 @@ namespace SimpleCircuitDesigner
 {
     internal class SwitchesSPSTGate : ItemBaseModel
     {
+        private bool IsClosed = false;
         public SwitchesSPSTGate(string modelImageUri, Point modelCoordinates) : base(modelImageUri, modelCoordinates)
         {
             elementImageUri = modelImageUri;
@@ -26,9 +27,15 @@ namespace SimpleCircuitDesigner
             IsSelected = false;
             Image = new Image();
             Endpoints = new List<Endpoint>();
+            InfoBorder = CreateInfoBorder(("Is closed: ", this, IsClosed, this.GetType()));
 
             CreateModel(new List<Endpoint> { new Endpoint(this, new Point(0,39.2)),
                                              new Endpoint(this, new Point(74, 39.2)) });
+        }
+        public void SetIsClosed(bool isClosed)
+        {
+            IsClosed = isClosed;
+            MessageBox.Show($"Gate close set as: {IsClosed}");
         }
     }
 }

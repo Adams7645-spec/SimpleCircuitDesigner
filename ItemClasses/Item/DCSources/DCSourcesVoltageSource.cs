@@ -28,6 +28,7 @@ namespace SimpleCircuitDesigner
             Image = new Image();
             this.Voltage = Voltage;
             Endpoints = new List<Endpoint>();
+            InfoBorder = CreateInfoBorder(("Voltage: ", this, Voltage, this.GetType()));
 
             CreateModel(new List<Endpoint> { new Endpoint(this, new Point(36.8, 0)),
                                              new Endpoint(this, new Point(36.8, 72)) });
@@ -35,6 +36,7 @@ namespace SimpleCircuitDesigner
         public void SetVoltage(int Voltage)
         {
             this.Voltage = Voltage;
+            MessageBox.Show($"Voltage on element set as: {Voltage}");
         }
     }
 }
