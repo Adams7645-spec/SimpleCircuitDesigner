@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections;
+using System.Xml.Linq;
 
 namespace SimpleCircuitDesigner
 {
@@ -30,6 +31,7 @@ namespace SimpleCircuitDesigner
         private List<ItemBaseModel> Models = new List<ItemBaseModel>();
         private List<Endpoint> Endpoints = new List<Endpoint>();
         private static Dictionary<int, ItemBaseModel> selectedItems = new Dictionary<int, ItemBaseModel>();
+        private Circuit circuit;
         public static bool IsDeletionModeEntered { get { return IsItemDeletionModeEntered; } }
         public static bool IsSelectionAvailable { get { return isSelectionAvailable; } }
         public static bool WiringMode { get { return IsWiringModeEntered; } }
@@ -57,6 +59,7 @@ namespace SimpleCircuitDesigner
         private void Button_CollapseItemPanel_MouseDown(object sender, MouseButtonEventArgs e)
         {
             BottomGrid.Margin = new Thickness(-272, 20, 15, 15);
+
         }
         private void EssentialDesignElement_Wire_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -71,7 +74,11 @@ namespace SimpleCircuitDesigner
                        new Thickness(10));
 
             if (IsSimulationEntered)
+            {
                 SimulationStatPanel.Visibility = Visibility.Visible;
+                SetCircuitParams();
+                CircuitCalculate();
+            }
             else
                 SimulationStatPanel.Visibility = Visibility.Hidden;
         }
@@ -139,7 +146,7 @@ namespace SimpleCircuitDesigner
         }
         private void DCSourcesDesigner_CurrentSource_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Models.Add(new DCSourcesVoltageSource("pack://application:,,,/SimpleCircuitDesigner;component/ImageSource/CurrentSource.png", new Point(600, 300), 1));
+            Models.Add(new DCSourcesCurrentSource("pack://application:,,,/SimpleCircuitDesigner;component/ImageSource/CurrentSource.png", new Point(600, 300), 1));
         }
         private void PassiveElements_Resistor_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -334,6 +341,79 @@ namespace SimpleCircuitDesigner
                     return endpoint;
             }
             return null;
+        }
+        private void SetCircuitParams()
+        {
+            double resistanse = 0;
+            double voltage = 0;
+            double current = 0;
+            double inductance = 0;
+            double capacitance = 0;
+
+            foreach (var model in Models)
+            {
+                var IsModelViable = true;
+
+                foreach (var point in model.Endpoints)
+                {
+                    if (!point.IsConnected)
+                    {
+                        IsModelViable = false;
+                    }
+                }
+
+                if (IsModelViable)
+                {
+                    switch (model.GetType().Name)
+                    {
+                        case "DCSourcesCurrentSource":
+                            var tempCurrentSource = (DCSourcesCurrentSource)model;
+                            current += tempCurrentSource.GetAmperage;
+                            break;
+                        case "DCSourcesVoltageSource":
+                            var tempVoltageSource = (DCSourcesVoltageSource)model;
+                            voltage += tempVoltageSource.getVoltage;
+                            break;
+                        case "PassiveItemCapasitor":
+                            var tempCapasitor = (PassiveItemCapasitor)model;
+                            capacitance += tempCapasitor.GetFarad;
+                            break;
+                        case "PassiveItemInductor":
+                            var tempInductor = (PassiveItemInductor)model;
+                            inductance += tempInductor.GetHenry;
+                            break;
+                        case "PassiveItemResistor":
+                            var tempResistor = (PassiveItemResistor)model;
+                            resistanse += tempResistor.GetOhm;
+                            break;
+                        case "SwitchesSPSTRelay":
+                            var tempRelay = (PassiveItemResistor)model;
+                            resistanse += tempRelay.GetOhm;
+                            break;
+                    }
+                }
+            }
+
+            circuit = new Circuit(resistanse, voltage, current, inductance, capacitance);
+        }
+        private void CircuitCalculate()
+        {
+            circuit.CalculateCurrent();
+            circuit.CalculatePower();
+            circuit.CalculateResistance();
+            circuit.CalculateVoltage();
+            circuit.CalculateImpedance();
+            circuit.CalculateFrequency();
+
+            CurrentLabel.Content = Math.Round(circuit.Current, 3);
+            EnergyLabel.Content = Math.Round(circuit.CalculateEnergy(0.2), 3);
+            PowerLabel.Content = Math.Round(circuit.Power, 3);
+            ResistanceLabel.Content = Math.Round(circuit.Resistance, 3);
+            VoltageLabel.Content = Math.Round(circuit.Voltage, 3);
+            InductanceLabel.Content = Math.Round(circuit.Inductance, 3);
+            CapacitanceLabel.Content = Math.Round(circuit.Capacitance, 3);
+            ImpedanceLabel.Content = Math.Round(circuit.CalculateImpedance(), 3);
+
         }
     }
 }

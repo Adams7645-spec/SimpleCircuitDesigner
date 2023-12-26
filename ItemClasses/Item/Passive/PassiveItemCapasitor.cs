@@ -19,7 +19,8 @@ namespace SimpleCircuitDesigner
 {
     internal class PassiveItemCapasitor : ItemBaseModel
     {
-        private int Farad;
+        private double Farad;
+        public double GetFarad { get => Farad; }
         public PassiveItemCapasitor(string modelImageUri, Point modelCoordinates, int Farad) : base(modelImageUri, modelCoordinates)
         {
             elementImageUri = modelImageUri;
@@ -33,7 +34,7 @@ namespace SimpleCircuitDesigner
             CreateModel(new List<Endpoint> { new Endpoint(this, new Point(36.6, 0)),
                                              new Endpoint(this, new Point(36.6, 72)) });
         }
-        public void SetFarad(int Farad)
+        public void SetFarad(double Farad)
         {
             this.Farad = Farad;
             MessageBox.Show($"Farad on element set as: {Farad}");

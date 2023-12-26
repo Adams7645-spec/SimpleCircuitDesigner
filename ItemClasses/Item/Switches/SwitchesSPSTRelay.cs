@@ -20,7 +20,7 @@ namespace SimpleCircuitDesigner
 {
     internal class SwitchesSPSTRelay : ItemBaseModel
     {
-        private int Ohm;
+        private double Ohm;
         private bool IsClosed;
         public SwitchesSPSTRelay(string modelImageUri, Point modelCoordinates) : base(modelImageUri, modelCoordinates)
         {
@@ -37,7 +37,7 @@ namespace SimpleCircuitDesigner
                                              new Endpoint(this, new Point(46.3, 3)),
                                              new Endpoint(this, new Point(46.3, 70)) });
         }
-        public void SetOhm(int ohm)
+        public void SetOhm(double ohm)
         {
             Ohm = ohm;
             MessageBox.Show($"Ohm on element set as: {Ohm}");

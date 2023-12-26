@@ -19,7 +19,8 @@ namespace SimpleCircuitDesigner
 {
     internal class PassiveItemResistor : ItemBaseModel
     {
-        private int Ohm;
+        private double Ohm;
+        public double GetOhm { get { return Ohm; } }
         public PassiveItemResistor(string modelImageUri, Point modelCoordinates, int Ohm) : base(modelImageUri, modelCoordinates)
         {
             elementImageUri = modelImageUri;
@@ -33,7 +34,7 @@ namespace SimpleCircuitDesigner
             CreateModel(new List<Endpoint> { new Endpoint(this, new Point(37.5, 0)),
                                              new Endpoint(this, new Point(37.5, 72)) });
         }
-        public void SetOhm(int Ohm)
+        public void SetOhm(double Ohm)
         {
             this.Ohm = Ohm;
             MessageBox.Show($"Ohm on element set as: {Ohm}");

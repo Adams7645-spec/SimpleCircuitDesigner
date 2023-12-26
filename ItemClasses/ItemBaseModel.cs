@@ -349,60 +349,60 @@ namespace SimpleCircuitDesigner
                                 var tempCurrentSource = (DCSourcesCurrentSource)element;
                                 try
                                 {
-                                    var tempAmperage = int.Parse(valueToSet);
+                                    var tempAmperage = double.Parse(valueToSet);
                                     tempCurrentSource.SetAmperage(tempAmperage);
                                 }
                                 catch
                                 {
-                                    MessageBox.Show("Введите целочисленное значение");
+                                    MessageBox.Show("Введите значение вида 0,0");
                                 }
                                 break;
                             case "DCSourcesVoltageSource":
                                 var tempVoltageSource = (DCSourcesVoltageSource)element;
                                 try
                                 {
-                                    var tempVoltage = int.Parse(valueToSet);
+                                    var tempVoltage = double.Parse(valueToSet);
                                     tempVoltageSource.SetVoltage(tempVoltage);
                                 }
                                 catch
                                 {
-                                    MessageBox.Show("Введите целочисленное значение");
+                                    MessageBox.Show("Введите значение вида 0,0");
                                 }
                                 break;
                             case "PassiveItemCapasitor":
                                 var tempCapasitor = (PassiveItemCapasitor)element;
                                 try
                                 {
-                                    var tempFarad = int.Parse(valueToSet);
+                                    var tempFarad = double.Parse(valueToSet);
                                     tempCapasitor.SetFarad(tempFarad);
                                 }
                                 catch
                                 {
-                                    MessageBox.Show("Введите целочисленное значение");
+                                    MessageBox.Show("Введите значение вида 0,0");
                                 }
                                 break;
                             case "PassiveItemInductor":
                                 var tempInductor = (PassiveItemInductor)element;
                                 try
                                 {
-                                    var tempHenry = int.Parse(valueToSet);
+                                    var tempHenry = double.Parse(valueToSet);
                                     tempInductor.SetHenry(tempHenry);
                                 }
                                 catch
                                 {
-                                    MessageBox.Show("Введите целочисленное значение");
+                                    MessageBox.Show("Введите значение вида 0,0");
                                 }
                                 break;
                             case "PassiveItemResistor":
                                 var tempResistor = (PassiveItemResistor)element;
                                 try
                                 {
-                                    var tempOhm = int.Parse(valueToSet);
+                                    var tempOhm = double.Parse(valueToSet);
                                     tempResistor.SetOhm(tempOhm);
                                 }
                                 catch
                                 {
-                                    MessageBox.Show("Введите целочисленное значение");
+                                    MessageBox.Show("Введите значение вида 0,0");
                                 }
                                 break;
                             case "SwitchesSPDTGate":
@@ -427,15 +427,15 @@ namespace SimpleCircuitDesigner
                                 var tempRelay = (SwitchesSPSTRelay)element;
                                 switch (value.GetType().Name)
                                 {
-                                    case "Int32":
+                                    case "Double":
                                         try
                                         {
-                                            var tempRelayOhm = int.Parse(valueToSet);
+                                            var tempRelayOhm = double.Parse(valueToSet);
                                             tempRelay.SetOhm(tempRelayOhm);
                                         }
                                         catch
                                         {
-                                            MessageBox.Show("Введите целочисленное значение");
+                                            MessageBox.Show("Введите значение вида 0,0");
                                         }
                                         break;
                                     case "Boolean":

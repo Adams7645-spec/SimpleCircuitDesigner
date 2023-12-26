@@ -19,7 +19,8 @@ namespace SimpleCircuitDesigner
 {
     internal class DCSourcesCurrentSource : ItemBaseModel
     {
-        private int Amperage;
+        private double Amperage;
+        public double GetAmperage { get { return Amperage; } }
         public DCSourcesCurrentSource(string modelImageUri, Point modelCoordinates, int Amperage) : base(modelImageUri, modelCoordinates)
         {
             elementImageUri = modelImageUri;
@@ -33,7 +34,7 @@ namespace SimpleCircuitDesigner
             CreateModel(new List<Endpoint> { new Endpoint(this, new Point(36.4, 0)),
                                              new Endpoint(this, new Point(36.4, 72)) });
         }
-        public void SetAmperage(int Amperage)
+        public void SetAmperage(double Amperage)
         {
             this.Amperage = Amperage;
             MessageBox.Show($"Amperage on element set as: {Amperage}");

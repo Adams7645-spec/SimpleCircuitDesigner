@@ -15,7 +15,7 @@
         ResizeMode="NoResize"
         WindowState="Minimized"
         WindowStartupLocation="CenterScreen">
-    
+
     <Window.Resources>
         <Style TargetType="Border"
                    x:Key="MainWindowBorderStyle">
@@ -398,7 +398,211 @@
                                     CornerRadius="25,0,0,25"
                                     x:Name="SimulationStatPanel"
                                     Visibility="Hidden">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
 
+                                    <Border Grid.Row="0"
+                                            Background="DimGray"
+                                            CornerRadius="25,0,0,0">
+                                        <WrapPanel Height="44" 
+                                                    Width="250">
+                                            <Border Height="44" 
+                                                        Width="115"
+                                                        Margin="10,0,0,0"
+                                                        VerticalAlignment="Center">
+                                                <Label Style="{StaticResource InternalLabelStyle}"
+                                                       Content="Voltage: "/>
+                                            </Border>
+
+                                            <Border Height="44" 
+                                                        Width="115"
+                                                        Margin="10,0,0,0"
+                                                        VerticalAlignment="Center">
+                                                <Label Style="{StaticResource InternalLabelStyle}"
+                                                       Content="0"
+                                                       HorizontalAlignment="Center"
+                                                       x:Name="VoltageLabel"/>
+                                            </Border>
+                                        </WrapPanel>
+                                    </Border>
+
+                                    <Border Grid.Row="1"
+                                            Background="#5A5A5A">
+                                        <WrapPanel Height="44" 
+                                                   Width="250">
+                                            <Border Height="44" 
+                                                    Width="115"
+                                                    Margin="10,0,0,0"
+                                                    VerticalAlignment="Center">
+                                                <Label Style="{StaticResource InternalLabelStyle}"
+                                                       Content="Resistance: "/>
+                                            </Border>
+
+                                            <Border Height="44" 
+                                                    Width="115"
+                                                    Margin="10,0,0,0"
+                                                    VerticalAlignment="Center">
+                                                <Label Style="{StaticResource InternalLabelStyle}"
+                                                       Content="0"
+                                                       HorizontalAlignment="Center"
+                                                       x:Name="ResistanceLabel"/>
+                                            </Border>
+                                        </WrapPanel>
+                                    </Border>
+                                    <Border Grid.Row="2"
+                                            Background="DimGray">
+                                        <WrapPanel Height="44" 
+                                                   Width="250">
+                                            <Border Height="44" 
+                                                    Width="115"
+                                                    Margin="10,0,0,0"
+                                                    VerticalAlignment="Center">
+                                                <Label Style="{StaticResource InternalLabelStyle}"
+                                                       Content="Current: "/>
+                                            </Border>
+
+                                            <Border Height="44" 
+                                                    Width="115"
+                                                    Margin="10,0,0,0"
+                                                    VerticalAlignment="Center">
+                                                <Label Style="{StaticResource InternalLabelStyle}"
+                                                       Content="0"
+                                                       HorizontalAlignment="Center"
+                                                       x:Name="CurrentLabel"/>
+                                            </Border>
+                                        </WrapPanel>
+                                    </Border>
+
+                                    <Border Grid.Row="3"
+                                            Background="#5A5A5A">
+                                        <WrapPanel Height="44" 
+                                                   Width="250">
+                                            <Border Height="44" 
+                                                    Width="115"
+                                                    Margin="10,0,0,0"
+                                                    VerticalAlignment="Center">
+                                                <Label Style="{StaticResource InternalLabelStyle}"
+                                                       Content="Power: "/>
+                                            </Border>
+
+                                            <Border Height="44" 
+                                                    Width="115"
+                                                    Margin="10,0,0,0"
+                                                    VerticalAlignment="Center">
+                                                <Label Style="{StaticResource InternalLabelStyle}"
+                                                       Content="0"
+                                                       HorizontalAlignment="Center"
+                                                       x:Name="PowerLabel"/>
+                                            </Border>
+                                        </WrapPanel>
+                                    </Border>
+
+                                    <Border Grid.Row="4"
+                                            Background="DimGray">
+                                        <WrapPanel Height="44" 
+                                                   Width="250">
+                                            <Border Height="44" 
+                                                    Width="115"
+                                                    Margin="10,0,0,0"
+                                                    VerticalAlignment="Center">
+                                                <Label Style="{StaticResource InternalLabelStyle}"
+                                                       Content="Energy: "/>
+                                            </Border>
+
+                                            <Border Height="44" 
+                                                    Width="115"
+                                                    Margin="10,0,0,0"
+                                                    VerticalAlignment="Center">
+                                                <Label Style="{StaticResource InternalLabelStyle}"
+                                                       Content="0"
+                                                       HorizontalAlignment="Center"
+                                                       x:Name="EnergyLabel"/>
+                                            </Border>
+                                        </WrapPanel>
+                                    </Border>
+
+                                    <Border Grid.Row="5"
+                                            Background="#5A5A5A">
+                                        <WrapPanel Height="44" 
+                                                   Width="250">
+                                            <Border Height="44" 
+                                                    Width="115"
+                                                    Margin="10,0,0,0"
+                                                    VerticalAlignment="Center">
+                                                <Label Style="{StaticResource InternalLabelStyle}"
+                                                       Content="Impedance: "/>
+                                            </Border>
+
+                                            <Border Height="44" 
+                                                    Width="115"
+                                                    Margin="10,0,0,0"
+                                                    VerticalAlignment="Center">
+                                                <Label Style="{StaticResource InternalLabelStyle}"
+                                                       Content="0"
+                                                       HorizontalAlignment="Center"
+                                                       x:Name="ImpedanceLabel"/>
+                                            </Border>
+                                        </WrapPanel>
+                                    </Border>
+
+                                    <Border Grid.Row="6"
+                                            Background="DimGray">
+                                        <WrapPanel Height="44" 
+                                                   Width="250">
+                                            <Border Height="44" 
+                                                    Width="115"
+                                                    Margin="10,0,0,0"
+                                                    VerticalAlignment="Center">
+                                                <Label Style="{StaticResource InternalLabelStyle}"
+                                                       Content="Inductance: "/>
+                                            </Border>
+
+                                            <Border Height="44" 
+                                                    Width="115"
+                                                    Margin="10,0,0,0"
+                                                    VerticalAlignment="Center">
+                                                <Label Style="{StaticResource InternalLabelStyle}"
+                                                       Content="0"
+                                                       HorizontalAlignment="Center"
+                                                       x:Name="InductanceLabel"/>
+                                            </Border>
+                                        </WrapPanel>
+                                    </Border>
+
+                                    <Border Grid.Row="7"
+                                            Background="#5A5A5A"
+                                            CornerRadius="0,0,0,25">
+                                        <WrapPanel Height="44" 
+                                                   Width="250">
+                                            <Border Height="44" 
+                                                    Width="115"
+                                                    Margin="10,0,0,0"
+                                                    VerticalAlignment="Center">
+                                                <Label Style="{StaticResource InternalLabelStyle}"
+                                                       Content="Capacited: "/>
+                                            </Border>
+
+                                            <Border Height="44" 
+                                                    Width="115"
+                                                    VerticalAlignment="Center"
+                                                    Margin="10,0,0,0">
+                                                <Label Style="{StaticResource InternalLabelStyle}"
+                                                       Content="0"
+                                                       HorizontalAlignment="Center"
+                                                       x:Name="CapacitanceLabel"/>
+                                            </Border>
+                                        </WrapPanel>
+                                    </Border>
+                                </Grid>
                             </Border>
                         </Grid>
                     </Grid>

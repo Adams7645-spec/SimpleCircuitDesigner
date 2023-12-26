@@ -19,7 +19,8 @@ namespace SimpleCircuitDesigner
 {
     internal class DCSourcesVoltageSource : ItemBaseModel
     {
-        private int Voltage;
+        private double Voltage;
+        public double getVoltage { get { return Voltage; } }
         public DCSourcesVoltageSource(string modelImageUri, Point modelCoordinates, int Voltage) : base(modelImageUri, modelCoordinates)
         {
             elementImageUri = modelImageUri;
@@ -33,7 +34,7 @@ namespace SimpleCircuitDesigner
             CreateModel(new List<Endpoint> { new Endpoint(this, new Point(36.8, 0)),
                                              new Endpoint(this, new Point(36.8, 72)) });
         }
-        public void SetVoltage(int Voltage)
+        public void SetVoltage(double Voltage)
         {
             this.Voltage = Voltage;
             MessageBox.Show($"Voltage on element set as: {Voltage}");

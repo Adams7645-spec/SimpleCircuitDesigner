@@ -19,7 +19,8 @@ namespace SimpleCircuitDesigner
 {
     internal class PassiveItemInductor : ItemBaseModel
     {
-        private int Henry;
+        private double Henry;
+        public double GetHenry { get => Henry; }
         public PassiveItemInductor(string modelImageUri, Point modelCoordinates, int Henry) : base(modelImageUri, modelCoordinates)
         {
             elementImageUri = modelImageUri;
@@ -33,7 +34,8 @@ namespace SimpleCircuitDesigner
             CreateModel(new List<Endpoint> { new Endpoint(this, new Point(36.9, 0)),
                                              new Endpoint(this, new Point(36.9, 72)) });
         }
-        public void SetHenry(int Henry)
+
+        public void SetHenry(double Henry)
         {
             this.Henry = Henry;
             MessageBox.Show($"Henry on element set as: {Henry}");
